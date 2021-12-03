@@ -52,17 +52,9 @@ final class TextFieldAlertController: UIViewController {
         return label
     }()
     
-    private lazy var textField: UITextField = {
-        let textField: UITextField = .init(frame: .zero)
-        textField.layer.borderColor = UIColor.systemGray4.cgColor
-        textField.layer.borderWidth = 1
-        textField.borderStyle = .none
-        textField.backgroundColor = .systemBackground
-        textField.placeholder = "플레이스홀더"
-        textField.font = .systemFont(ofSize: 13)
-        textField.spellCheckingType = .no
-        textField.autocorrectionType = .no
-        textField.textColor = .black    // 레이어부터 여기까지는 텍스트필드 커스터마이징시 그쪽으로 이동
+    private lazy var textField: InputTextField = {
+        let textField: InputTextField = .init(frame: .zero)
+        textField.symbolText = "#"
         textField.addTarget(self, action: #selector(textFieldEditingDidEndOnExit(_:)), for: .editingDidEndOnExit)
         textField.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: .editingChanged)
         textField.delegate = self
@@ -133,9 +125,15 @@ final class TextFieldAlertController: UIViewController {
         }
     }
     
-    var maxTextLength: Int = 30 {
+    var maxTextLength: Int = 15 {
         didSet {
             updateTextLengthLabel()
+        }
+    }
+    
+    var placeholderText: String? {
+        didSet {
+            textField.placeholder = placeholderText
         }
     }
     
@@ -349,5 +347,103 @@ extension TextFieldAlertController: UITextFieldDelegate {
         guard let text = textField.text else { return true }
         let length = text.count + string.count - range.length
         return length <= maxTextLength
+    }
+}
+
+private final class InputTextField: UITextField {
+    static let symbolLabelHeight: CGFloat = 14
+    
+    private lazy var symbolLabel: UILabel = {
+        let label: UILabel = .init(frame: .zero)
+        label.backgroundColor = .clear
+        label.font = .systemFont(ofSize: 13)
+        label.textColor = .black
+        label.textAlignment = .right
+        label.sizeToFit()
+        label.frame = CGRect(x: symbolLabelLeftMargin, y: -1, width: label.width, height: Self.symbolLabelHeight)
+        return label
+    }()
+    
+    private lazy var symbolView: UIView = {
+        let view: UIView = .init(frame: CGRect(x: 0, y: 0, width: symbolLabel.width + symbolLabelLeftMargin, height: Self.symbolLabelHeight))
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    var symbolLabelLeftMargin: CGFloat = 4 {
+        // 텍스트필드의 시작지점과 symbolLabel의 시작지점간의 여백
+        didSet {
+            updateLayout()
+        }
+    }
+    
+    var placeholderLeftMargin: CGFloat = 14 {
+        // 텍스트필드의 시작지점과 플레이스홀더의 시점지점간의 여백
+        didSet {
+            updateLayout()
+        }
+    }
+    
+    var symbolText: String? {
+        didSet {
+            guard let symbolText = symbolText else {
+                return
+            }
+            symbolLabel.text = symbolText
+            updateLayout()
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        initView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func initView() {
+        layer.borderColor = UIColor.systemGray4.cgColor
+        layer.borderWidth = 1
+        borderStyle = .none
+        backgroundColor = .systemBackground
+        font = .systemFont(ofSize: 13)
+        spellCheckingType = .no
+        autocorrectionType = .no
+        textColor = .black
+        
+        symbolView.addSubview(symbolLabel)
+        
+        leftView = symbolView
+        leftViewMode = .always
+    }
+    
+    private func updateLayout() {
+        symbolLabel.sizeToFit()
+        symbolLabel.frame = CGRect(x: symbolLabelLeftMargin, y: -1, width: symbolLabel.width, height: Self.symbolLabelHeight)
+        symbolView.frame = CGRect(x: 0, y: 0, width: symbolLabel.width + symbolLabelLeftMargin, height: Self.symbolLabelHeight)
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        layer.borderColor = UIColor.systemGray4.cgColor
+    }
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        // 텍스트의 시작위치를 지정한다.
+        var rect: CGRect = bounds
+        rect.origin.x += placeholderLeftMargin
+        rect.origin.y += 1
+        return rect
+    }
+    
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        // 플레이스홀더의 시작위치를 지정한다.
+        var rect: CGRect = bounds
+        rect.origin.x += placeholderLeftMargin
+        rect.origin.y += 1
+        return rect
     }
 }

@@ -17,6 +17,7 @@
 		C28BFB92275A113200D453FF /* TextFieldAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28BFB91275A113200D453FF /* TextFieldAlertController.swift */; };
 		C28BFB94275A135D00D453FF /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28BFB93275A135D00D453FF /* UIColor+Extension.swift */; };
 		C28BFB97275A66FD00D453FF /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28BFB96275A66FD00D453FF /* UIView+Animation.swift */; };
+		C28BFB99275A6D8A00D453FF /* UIView+Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28BFB98275A6D8A00D453FF /* UIView+Frame.swift */; };
 		F4D6C0C5AFA7F61F87771C78 /* Pods_CustomUIComponentsTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E7BD3169776B88147B4171 /* Pods_CustomUIComponentsTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		C28BFB91275A113200D453FF /* TextFieldAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlertController.swift; sourceTree = "<group>"; };
 		C28BFB93275A135D00D453FF /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		C28BFB96275A66FD00D453FF /* UIView+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; };
+		C28BFB98275A6D8A00D453FF /* UIView+Frame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Frame.swift"; sourceTree = "<group>"; };
 		D2E3E9FCE8BD41BE8E10258B /* Pods-CustomUIComponentsTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CustomUIComponentsTest.release.xcconfig"; path = "Target Support Files/Pods-CustomUIComponentsTest/Pods-CustomUIComponentsTest.release.xcconfig"; sourceTree = "<group>"; };
 		DD3CF7219BAE938EAA530DB1 /* Pods-CustomUIComponentsTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CustomUIComponentsTest.debug.xcconfig"; path = "Target Support Files/Pods-CustomUIComponentsTest/Pods-CustomUIComponentsTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				C28BFB96275A66FD00D453FF /* UIView+Animation.swift */,
+				C28BFB98275A6D8A00D453FF /* UIView+Frame.swift */,
 				C28BFB93275A135D00D453FF /* UIColor+Extension.swift */,
 			);
 			path = Utils;
@@ -246,6 +249,7 @@
 				C28BFB7A275A075F00D453FF /* AppDelegate.swift in Sources */,
 				C28BFB8F275A0B8800D453FF /* CommonButton.swift in Sources */,
 				C28BFB94275A135D00D453FF /* UIColor+Extension.swift in Sources */,
+				C28BFB99275A6D8A00D453FF /* UIView+Frame.swift in Sources */,
 				C28BFB92275A113200D453FF /* TextFieldAlertController.swift in Sources */,
 				C28BFB97275A66FD00D453FF /* UIView+Animation.swift in Sources */,
 				C28BFB7C275A076000D453FF /* SceneDelegate.swift in Sources */,

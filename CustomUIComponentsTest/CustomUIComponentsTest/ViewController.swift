@@ -39,6 +39,7 @@ extension ViewController {
         vc.modalPresentationStyle = .overCurrentContext
         vc.delegate = self
         vc.alertTitle = "테스트"
+        vc.placeholderText = "플레이스 홀더"
         vc.maxTextLength = 15
         self.present(vc, animated: false, completion: nil)
     }
