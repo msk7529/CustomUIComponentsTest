@@ -37,7 +37,13 @@ extension ViewController {
     @objc private func didTapButton1() {
         let vc: TextFieldAlertController = .init()
         vc.modalPresentationStyle = .overCurrentContext
+        vc.delegate = self
+        vc.alertTitle = "테스트"
+        vc.maxTextLength = 15
         self.present(vc, animated: false, completion: nil)
     }
 }
 
+extension ViewController: TextFieldAlertControllerDelegate {
+    
+}
